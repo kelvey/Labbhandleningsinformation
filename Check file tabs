@@ -1,0 +1,39 @@
+Unix kommandon för att ta reda på vad en fil innehåller.
+"Cat" kommandot (som listar innehållet i en fil) kan användas för att ta reda på vad som egentligen står i en fil. Följande flaggor är användbara:
+
+     -e     Display non-printing characters (see the -v option), and display a
+            dollar sign (`$') at the end of each line.
+
+     -t      Display non-printing characters, and display tab characters as `^I'.
+             Display non-printing characters so they are visible.  Control
+             characters print as `^X' for control-X; the delete character
+             (octal 0177) prints as `^?'.  Non-ASCII characters (with the high
+             bit set) are printed as `M-' (for meta) followed by the character
+             for the low 7 bits.
+
+dvs tabbar skrivs som "^I" och slutet på raden markeras med "$".
+
+% cat -te HelloWorld.java
+public class HelloWorld {$
+^I// A program to display the message$
+^I// "Hello World!" on standard output$
+^Ipublic static void main(String[] args) {$
+^I^ISystem.out.println("Hello World!");$
+^I}$
+} // end of class HelloWorld
+
+$
+
+Om du bara har "^I" (noll eller flera) i början på alla rader så är det bra (som ovan). Om du bara har mellanslag i början på alla rader så är det bättre men om det är en blandning så är det inte bra. De flesta editorer kan ställas in så att dom använder det ena eller det andra.
+
+"File" kommandot i Unix försöker ta reda på vad en fil innehåller:
+
+% file HelloWorld.java
+HelloWorld.java: ASCII C++ program text
+
+Här var filen lagrad som ASCII-text (dvs Iso-latin-1). Numera använder man hellre Unicode och då skulle det se ut så här:
+
+% file Secant.java
+Secant.java: UTF-8 Unicode C++ program text
+
+Som ni ser så är file inte så bra på att inse att det är en java fil men förstår i alla fall att det är ett program :-) 
